@@ -16,6 +16,8 @@ import (
 	"github.com/anyswap/CrossChain-Router/v3/tokens/tests/eth"
 	"github.com/anyswap/CrossChain-Router/v3/tokens/tests/template"
 	"github.com/urfave/cli/v2"
+	// import local directory
+	"github.com/anyswap/CrossChain-Router/v3/tokens/tests/local"
 )
 
 var (
@@ -78,6 +80,8 @@ func initRouter() {
 		bridge = eth.NewCrossChainBridge()
 	case "template":
 		bridge = template.NewCrossChainBridge()
+	case "local":
+		bridge = local.NewCrossChainBridge()
 	default:
 		log.Fatalf("unimplemented test module '%v'", testCfg.Module)
 	}
@@ -128,6 +132,7 @@ func initRouter() {
 		)
 	}
 	router.PrintMultichainTokens()
+	fmt.Println(swapConfigs, testCfg.Token, swapCfg)
 
 	tokens.SetSwapConfigs(swapConfigs)
 	tokens.SetFeeConfigs(feeConfigs)
@@ -164,6 +169,7 @@ func process(opts map[string]string) error {
 		LogIndex: logIndex,
 	}
 	registerOK := false
+	fmt.Println("HEREE")
 	infos, errs := bridge.RegisterSwap(txid, registerArgs)
 	for i, err := range errs {
 		if err == nil && infos[i] != nil {

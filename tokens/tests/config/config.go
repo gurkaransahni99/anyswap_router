@@ -116,6 +116,8 @@ func (c *SwapConfig) CheckConfig() error {
 
 // LoadTestConfig load test router config
 func LoadTestConfig(configFile string) {
+	// configFile = "github.com/anyswap/CrossChain-Router/v3/tokens/tests/config/config-test.toml"
+	// configFile = "tokens/tests/config/config-test.toml"
 	if configFile == "" {
 		log.Fatal("must specify config file")
 	}

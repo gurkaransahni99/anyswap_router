@@ -5,7 +5,7 @@ Identifier = "routerswap#test"
 SwapType = "erc20swap"
 
 # test module name
-Module = "eth"
+Module = "local"
 
 # rpc listen port
 Port = 11556
@@ -25,15 +25,14 @@ AllChainIDs = ["56", "25"]
 
 
 [Gateway]
-# APIAddress = ["http://127.0.0.1:6711"]
-APIAddress = ["https://bsc-dataseed.binance.org/"]
+APIAddress = ["http://127.0.0.1:8545/"]
 
 
 # chain config
 [Chain]
 ChainID = "56"
 BlockChain = "bsc"
-RouterContract = "0x92c079d3155c2722dbf7e65017a5baf9cd15561c"
+RouterContract = "0xc5E4B720bF5c332828F56D28c7996Cf2d4C4BE37"
 Confirmations  = 1
 InitialHeight  = 0
 
@@ -43,9 +42,9 @@ InitialHeight  = 0
 TokenID         = "anyBNB"
 Decimals        = 18
 ContractVersion = 6
-ContractAddress = "0x49974c3c99f4e74d08845c31d3f4f16fdc264ebd"
-Underlying      = "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
-RouterContract  = "0x92c079d3155c2722dbf7e65017a5baf9cd15561c"
+ContractAddress = "0x920D80F5490c073A46076a61897A6e6dc88Bbf0D"
+Underlying      = "0x3833AC807882F5a7f83E1c6f8318C1d0A5772d39"
+RouterContract  = "0xc5E4B720bF5c332828F56D28c7996Cf2d4C4BE37"
 
 
 [Swap]

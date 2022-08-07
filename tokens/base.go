@@ -234,23 +234,28 @@ func CheckTokenSwapValue(swapInfo *SwapTxInfo, fromDecimals, toDecimals uint8) b
 	}
 	value := swapInfo.Value
 	if value == nil || value.Sign() <= 0 {
+		fmt.Println("HERE1")
 		return false
 	}
 	tokenID := swapInfo.GetTokenID()
 	fromChainID := swapInfo.FromChainID.String()
 	toChainID := swapInfo.ToChainID.String()
 	swapCfg := GetSwapConfig(tokenID, fromChainID, toChainID)
+	fmt.Println("CheckTokenSwapValue", swapCfg)
 	if swapCfg == nil {
+		fmt.Println("HERE2")
 		return false
 	}
 	minSwapValue := ConvertTokenValue(swapCfg.MinimumSwap, 18, fromDecimals)
 	if value.Cmp(minSwapValue) < 0 {
+		fmt.Println("HERE3")
 		return false
 	}
 	maxSwapValue := ConvertTokenValue(swapCfg.MaximumSwap, 18, fromDecimals)
 	if value.Cmp(maxSwapValue) > 0 &&
 		!params.IsInBigValueWhitelist(tokenID, swapInfo.From) &&
 		!params.IsInBigValueWhitelist(tokenID, swapInfo.TxTo) {
+		fmt.Println("HERE4")
 		return false
 	}
 	return CalcSwapValue(tokenID, fromChainID, toChainID, value, fromDecimals, toDecimals, swapInfo.From, swapInfo.TxTo).Sign() > 0

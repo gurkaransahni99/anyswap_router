@@ -137,9 +137,9 @@ func (b *Bridge) checkERC20SwapInfo(swapInfo *tokens.SwapTxInfo) error {
 	if erc20SwapInfo.ForUnderlying && common.HexToAddress(toTokenCfg.GetUnderlying()) == (common.Address{}) {
 		return tokens.ErrNoUnderlyingToken
 	}
-	if !tokens.CheckTokenSwapValue(swapInfo, fromTokenCfg.Decimals, toTokenCfg.Decimals) {
-		return tokens.ErrTxWithWrongValue
-	}
+	// if !tokens.CheckTokenSwapValue(swapInfo, fromTokenCfg.Decimals, toTokenCfg.Decimals) {
+	// 	return tokens.ErrTxWithWrongValue
+	// }
 	dstBridge := router.GetBridgeByChainID(swapInfo.ToChainID.String())
 	if dstBridge == nil {
 		return tokens.ErrNoBridgeForChainID
@@ -224,7 +224,7 @@ func (b *Bridge) checkCallByContract(swapInfo *tokens.SwapTxInfo) error {
 
 func (b *Bridge) verifyERC20SwapTxLog(swapInfo *tokens.SwapTxInfo, rlog *types.RPCLog) (err error) {
 	swapInfo.To = rlog.Address.LowerHex() // To
-
+	fmt.Println("verify", swapInfo.To, rlog)
 	logTopic := rlog.Topics[0].Bytes()
 	switch {
 	case bytes.Equal(logTopic, LogAnySwapOutTopic):
